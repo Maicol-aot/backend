@@ -1,7 +1,10 @@
 const { Schema, model } = require("mongoose");
-//const ObjectId = mongoose.Schema.Types.ObjectId;
+const mongoose = require("mongoose");
+const {hash, genSalt, compare } = require('bcrypt');
+//const ObjectId = mongoose.Schema.Types.ObjectId; pendiente por utilizar...
 
 const userSchema = new Schema({
+
     id_usuario:{
         type:Number,
         unique:true,
@@ -20,14 +23,14 @@ const userSchema = new Schema({
         required:true
     },
     fechaNacimiento:{
-        type:Date,
+        type:String,
         required:true
     },
     tipoDoc:{
         type:String,
         required:true
     },
-    noDoc:{
+    nDoc:{
         type:Number,
         required:true
     },
@@ -36,7 +39,7 @@ const userSchema = new Schema({
         required:true
     },
     fechaExpedicion:{
-        type:Date,
+        type:String,
         required:true
     },
     departamento:{
@@ -76,6 +79,21 @@ const userSchema = new Schema({
         required:true
     }
 
+},{
+    collection: 'usuarios'
 });
 
-exports.Usuario = model('User', userSchema);
+userSchema.pre('save', async function (next){
+    console.log("Transformando contraseña");
+    const salt = await genSalt(process.env.BCRIPT_ROUNDS );
+    this.password = await hash(this.password, salt);
+    next();
+});
+
+userSchema.methods.compararPasswords = async function (){
+    console.log("Comparando contraseñas");
+    return await compare(textPassword, this.password);
+};
+
+
+exports.User = model('User', userSchema);
