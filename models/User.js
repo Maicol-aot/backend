@@ -1,0 +1,81 @@
+const { Schema, model } = require("mongoose");
+//const ObjectId = mongoose.Schema.Types.ObjectId;
+
+const userSchema = new Schema({
+    id_usuario:{
+        type:Number,
+        unique:true,
+        required:true
+    },
+    nombre:{
+        type:String,
+        required:true
+    },
+    primerApellido:{
+        type:String,
+        required:true
+    },
+    segundoApellido:{
+        type:String,
+        required:true
+    },
+    fechaNacimiento:{
+        type:Date,
+        required:true
+    },
+    tipoDoc:{
+        type:String,
+        required:true
+    },
+    noDoc:{
+        type:Number,
+        required:true
+    },
+    lugarExpedicion:{
+        type:String,
+        required:true
+    },
+    fechaExpedicion:{
+        type:Date,
+        required:true
+    },
+    departamento:{
+        type:String,
+        required:true
+    },
+    municipio:{
+        type:String,
+        required:true
+    },
+    direccion:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    movil:{
+        type:String,
+        required:true
+    },
+    usrname:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    rol:{
+        type:String,
+        required:true
+    },
+    saldo:{
+        type:Number,
+        required:true
+    }
+
+});
+
+exports.Usuario = model('User', userSchema);
