@@ -1,14 +1,11 @@
 const { Schema, model } = require("mongoose");
-const mongoose = require("mongoose");
 const {hash, genSalt, compare } = require('bcrypt');
-//const ObjectId = mongoose.Schema.Types.ObjectId; pendiente por utilizar...
 
 const userSchema = new Schema({
 
     id_usuario:{
         type:Number,
-        unique:true,
-        required:true
+        unique:true
     },
     nombre:{
         type:String,

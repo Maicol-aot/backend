@@ -1,15 +1,14 @@
 const express = require("express");
-const { User } = require("../models/User");
+const { Eventos } = require("../models/Eventos");
 const router=express.Router();
 
 //Creacion del usuario
-router.post('/registro', async (request, response)=>{
+router.post('/gestionarEventos', async (request, response)=>{
 
-    const usr = new User(request.body);
-
+    const eventos = new Eventos(request.body);
     try {
-        await usr.save();
-        response.send({"mensaje" : "Usuario registrado con exito." });        
+        await eventos.save();
+        response.send({"mensaje" : "Evento registrado con exito." });        
     } catch (error) {
         response.status(500).send("Ocurrió un error en la base de datos de usuarios.");
         console.log(error);
