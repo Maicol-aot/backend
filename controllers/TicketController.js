@@ -1,16 +1,10 @@
 const express = require("express");
-const { Ticket } = require("../models/Ticket");
+const { Ticket } = require("../models/Ticket"); //Importa el esquema del ticket
 const router=express.Router();
 
-//Creacion del usuario
+//Creacion del ticket
 router.post('/generarTicket', async (request, response)=>{
-
-    /*const ticket = request.json();
-
-    console.log(ticket);*/
-
     const ticket = new Ticket(request.body);
-
     try {
         await ticket.save();
         response.send({"mensaje" : "ticket generado con exito." });        

@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const {hash, genSalt, compare } = require('bcrypt');
 
+//Creacion del esquema de usuario
 const userSchema = new Schema({
 
     id_usuario:{
@@ -80,12 +81,15 @@ const userSchema = new Schema({
     collection: 'usuarios'
 });
 
+
+//Encriptacion de la contraseña
 userSchema.pre('save', async function (next){
     console.log("Transformando contraseña");
     const salt = await genSalt(process.env.BCRIPT_ROUNDS );
     this.password = await hash(this.password, salt);
     next();
 });
+
 
 userSchema.methods.compararPasswords = async function (){
     console.log("Comparando contraseñas");

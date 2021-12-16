@@ -1,12 +1,10 @@
 const express = require("express");
-const { User } = require("../models/User");
+const { User } = require("../models/User");  //Importa el esquema de usuarios
 const router=express.Router();
 
 //Creacion del usuario
 router.post('/registro', async (request, response)=>{
-
     const usr = new User(request.body);
-
     try {
         await usr.save();
         response.send({"mensaje" : "Usuario registrado con exito." });        

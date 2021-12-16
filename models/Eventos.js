@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+//Creacion del esquema de eventos
 const eventosSchema = new Schema({
 
     idEvento:{
@@ -61,5 +62,6 @@ const eventosSchema = new Schema({
 },{
     collection: 'Eventos'
 });
+
 
 exports.Eventos = model('Eventos', eventosSchema);

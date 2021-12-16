@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+//Creacion del esquema de los tickets
 const ticketSchema = new Schema({
 
     ticketId:{
@@ -17,7 +18,6 @@ const ticketSchema = new Schema({
 },{
     collection: 'Ticket'
 });
-
 
 
 exports.Ticket = model('Ticket', ticketSchema);
