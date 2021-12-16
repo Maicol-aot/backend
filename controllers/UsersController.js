@@ -21,11 +21,12 @@ router.post('/registro', async (request, response)=>{
 router.post('/auth', async (request, response)=>{
     try {
         const { refreshToken, accesToken } = await validarUsuario(request.body);
-        console.log("Respondiendo inicio de sesión.")
+        console.log("Respondiendo inicio de sesión.");
         response.cookie('RTC',refreshToken, { httpOnly: true })
             .json({ token: accesToken });
         console.log("Usuario ingreso con exito")
     } catch (error) {
+        console.log("Error al iniciar sesion");
         console.log(error);
         response.status(403).send("Nombre de usuario o contraseña incorrecta.");
     }
