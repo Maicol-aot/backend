@@ -91,7 +91,7 @@ userSchema.pre('save', async function (next){
 });
 
 
-userSchema.methods.compararPasswords = async function (){
+userSchema.methods.compararPasswords = async function (textPassword){
     console.log("Comparando contraseñas");
     return await compare(textPassword, this.password);
 };
