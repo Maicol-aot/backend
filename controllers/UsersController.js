@@ -18,7 +18,7 @@ router.post('/registro', async (request, response)=>{
 
 //Json del cuerpo de la peticion para iniciar sesion
 //(username: xxxxxx, password xxxx)
-router.post('/auth', async (request, response)=>{
+router.post('/login', async (request, response)=>{
     try {
         const { refreshToken, accesToken } = await validarUsuario(request.body);
         console.log("Respondiendo inicio de sesión.");
