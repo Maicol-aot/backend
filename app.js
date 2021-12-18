@@ -2,11 +2,13 @@ require('dotenv').config();
 const express = require('express');
 const cookieparser = require('cookie-parser');
 const { conectarMongoDB } = require('./db/db');
+const cors = require('cors');
 
 //Llama al export "registrarControladores" previamente creado en el controllers/index.js
 const  { registrarControladores } = require('./controllers');
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 9000;
 
 
