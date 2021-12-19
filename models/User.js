@@ -4,10 +4,7 @@ const {hash, genSalt, compare } = require('bcrypt');
 //Creacion del esquema de usuario
 const userSchema = new Schema({
 
-    id_usuario:{
-        type:Number,
-        unique:true
-    },
+    
     nombre:{
         type:String,
         required:true

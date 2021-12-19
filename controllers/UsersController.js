@@ -6,11 +6,14 @@ const router=express.Router();
 //Creacion del usuario
 router.post('/registro', async (request, response)=>{
     const usr = new User(request.body);
+    console.log(usr)
     try {
         await usr.save();
-        response.send({"mensaje" : "Usuario registrado con exito." });        
+        
+        response.json({mensaje : "Usuario registrado con exito." });     
+           
     } catch (error) {
-        response.status(500).send("Ocurrió un error en la base de datos de usuarios.");
+        response.status(500).json({mensaje:"Ocurrió un error en la base de datos de usuarios."});
         console.log(error);
     }
 });
