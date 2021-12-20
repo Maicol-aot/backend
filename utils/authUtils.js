@@ -25,9 +25,11 @@ const validarUsuario = async (usuario_peticion)=>{
     if (!user) throw new Error('Usuario o contraseña no valido.');
     console.log('Validando login...');
     const passwordMatch = await user.compararPasswords(usuario_peticion.password);
+    console.log(user.rol);
     if (!passwordMatch) throw new Error('Contraseña no valido.');
 
-    return await getTokenPair(user);
+    return await user.rol; //Devuelve el rol del usuario
+    //return await getTokenPair(user);
 }
 
 exports.validarUsuario = validarUsuario;

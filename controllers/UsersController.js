@@ -22,15 +22,26 @@ router.post('/registro', async (request, response)=>{
 //(username: xxxxxx, password xxxx)
 router.post('/login', async (request, response)=>{
     try {
-        const { refreshToken, accesToken } = await validarUsuario(request.body);
+        //const { refreshToken, accesToken } = await validarUsuario(request.body); (Sin usar)
+        const rol = await validarUsuario(request.body);
+        console.log(rol); //Imprime el rol del usuario
         console.log("Respondiendo inicio de sesión.");
-        response.cookie('RTC',refreshToken, { httpOnly: true })
-            .json({ token: accesToken });
+        //response.cookie('RTC',refreshToken, { httpOnly: true }).json({ token: accesToken }); (Sin usar)
         console.log("Usuario ingreso con exito")
+
+        //Dependiendo del tipo de usuario que sea va a enviar un status code diferente
+        //StatusCode 200 == Usuario
+        //StatusCode 201 == Administrador
+        if(rol == 'user'){ 
+            response.status(200).json({rol:rol});
+        }else{
+            response.status(201).json({rol:rol});
+        }
+        
     } catch (error) {
         console.log("Error al iniciar sesion");
         console.log(error);
-        response.status(403).send("Nombre de usuario o contraseña incorrecta.");
+        response.status(403).json({mensaje: "Nombre de usuario o contraseña incorrecta."});
     }
 });
 
