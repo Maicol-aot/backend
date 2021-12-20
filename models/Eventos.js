@@ -3,10 +3,7 @@ const { Schema, model } = require("mongoose");
 //Creacion del esquema de eventos
 const eventosSchema = new Schema({
 
-    idEvento:{
-        type:Number,
-        unique:true,
-    },
+
     nombreEvento:{
         type:String,
         required:true
@@ -16,44 +13,45 @@ const eventosSchema = new Schema({
         required:true
     },
     dateInit:{
-        type:Date,
+        type:String,
         required:true
     },
+    
     dateEnd:{
-        type:Date,
-        required:true
+        type:String,
+        required:false
     },
     limitDate:{
-        type:Date,
+        type:String,
         required:true
     },
     cuota1:{
-        type:Number,
+        type:String,
         required:true
     },
     cuota2:{
-        type:Number,
+        type:String,
         required:true
     },
     cuotaX:{
-        type:Number,
+        type:String,
         required:true
     },
     profit:{
-        type:Number,
-        required:true
+        type:String,
+        required:false
     },
     nApostadores:{
         type:Number,
-        required:true
+        required:false
     },
     resultado1:{
         type:String,
-        required:true
+        required:false
     },
     resultado2:{
         type:String,
-        required:true
+        required:false
     },
     estadoActivo:{
         type:Boolean,
