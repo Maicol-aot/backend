@@ -4,6 +4,8 @@ require('dotenv').config();
 
 
 const getTokenPair = async (user) => {
+    const rol = user.rol
+    console.log("Este es el rol: " +rol);
     const accesToken = await sign(
         { _id: user._id, rol: user.rol, usrname: user.usrname },
         process.env.JWT_ACCES_SECRET,
@@ -15,7 +17,7 @@ const getTokenPair = async (user) => {
 
     console.log("Tokens generados ");
     console.log({ refreshToken, accesToken });
-    return { refreshToken, accesToken };
+    return { refreshToken, accesToken, rol };
 }
 
 const validarUsuario = async (usuario_peticion)=>{
@@ -25,11 +27,10 @@ const validarUsuario = async (usuario_peticion)=>{
     if (!user) throw new Error('Usuario o contraseña no valido.');
     console.log('Validando login...');
     const passwordMatch = await user.compararPasswords(usuario_peticion.password);
-    console.log(user.rol);
     if (!passwordMatch) throw new Error('Contraseña no valido.');
 
-    return await user.rol; //Devuelve el rol del usuario
-    //return await getTokenPair(user);
+    
+    return await getTokenPair(user);
 }
 
 exports.validarUsuario = validarUsuario;

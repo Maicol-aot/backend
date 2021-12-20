@@ -21,21 +21,21 @@ router.post('/registro', async (request, response)=>{
 //Json del cuerpo de la peticion para iniciar sesion
 //(username: xxxxxx, password xxxx)
 router.post('/login', async (request, response)=>{
-    try {
-        //const { refreshToken, accesToken } = await validarUsuario(request.body); (Sin usar)
-        const rol = await validarUsuario(request.body);
-        console.log(rol); //Imprime el rol del usuario
-        console.log("Respondiendo inicio de sesión.");
-        //response.cookie('RTC',refreshToken, { httpOnly: true }).json({ token: accesToken }); (Sin usar)
-        console.log("Usuario ingreso con exito")
 
+    try {
+
+        const { refreshToken, accesToken } = await validarUsuario(request.body);
+        const usr = await validarUsuario(request.body);
+        const rol = usr.rol;
+        console.log("Respondiendo inicio de sesión.");
+        
         //Dependiendo del tipo de usuario que sea va a enviar un status code diferente
         //StatusCode 200 == Usuario
         //StatusCode 201 == Administrador
         if(rol == 'user'){ 
-            response.status(200).json({rol:rol});
-        }else{
-            response.status(201).json({rol:rol});
+            response.status(200).json({ token: accesToken }); 
+        }else if(rol == 'admin'){
+            response.status(201).json({ token: accesToken }); 
         }
         
     } catch (error) {
