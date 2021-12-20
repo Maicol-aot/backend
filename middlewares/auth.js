@@ -1,6 +1,6 @@
 const { verify }  = require('jsonwebtoken');
 
-const authGuard = (_request, _respones, next) =>{
+const authGuard = (_request, _response, next) =>{
     const authorization = _request.headers.authorization;
     if (!authorization){
         _response.status(401).send("Usted no tiene permisos para acceder a esta accion");

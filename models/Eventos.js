@@ -16,10 +16,15 @@ const eventosSchema = new Schema({
         type:String,
         required:true
     },
-    
+
     dateEnd:{
         type:String,
         required:false
+    },
+
+    timeInit:{
+        type:String,
+        required:true
     },
     limitDate:{
         type:String,
